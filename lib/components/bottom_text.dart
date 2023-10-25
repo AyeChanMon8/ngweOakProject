@@ -64,7 +64,7 @@ class _BottomTextState extends State<BottomText> {
                       ? 'Log In'
                       : 'Sign Up',
                   style: const TextStyle(
-                    color: kSecondaryColor,
+                    color: kLabelColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
