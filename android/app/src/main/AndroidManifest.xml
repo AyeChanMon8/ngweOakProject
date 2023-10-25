@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ngwe_oak_project">
    <application
-        android:label="ngwe_oak_project"
+        android:label="Ngwe Ooak"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
