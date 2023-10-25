@@ -1,5 +1,7 @@
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:ngwe_oak_project/components/drawer.dart';
+import 'package:ngwe_oak_project/utils/constants.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -20,7 +22,15 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xffcaf1ff),
+        drawer: DrawerPage(),
+        appBar: AppBar(
+          centerTitle: true,
+          title: const Text(
+            'Ngwe Oak',
+          ),
+          backgroundColor: kPrimaryColor,
+        ),
+        backgroundColor: kBackgroundColor,
         bottomNavigationBar: Padding(
           padding: EdgeInsets.only(bottom: 10),
           child: DotNavigationBar(
@@ -31,17 +41,17 @@ class _HomePageState extends State<HomePage> {
             onTap: _handleIndexChanged,
             items: [
               DotNavigationBarItem(
-                  icon: Icon(Icons.home), selectedColor: Color(0xff73544c)),
+                  icon: Icon(Icons.home), selectedColor: kPrimaryColor),
               DotNavigationBarItem(
-                  icon: Icon(Icons.favorite), selectedColor: Color(0xff73544c)),
+                  icon: Icon(Icons.favorite), selectedColor: kPrimaryColor),
               DotNavigationBarItem(
-                  icon: Icon(Icons.search), selectedColor: Color(0xff73544c)),
+                  icon: Icon(Icons.search), selectedColor: kPrimaryColor),
               DotNavigationBarItem(
-                  icon: Icon(Icons.person), selectedColor: Color(0xff73544c))
+                  icon: Icon(Icons.person), selectedColor: kPrimaryColor)
             ],
           ),
         ));
   }
 }
 
-enum _SelectedTab { home, favorite, search, person}
+enum _SelectedTab { home, favorite, search, person }

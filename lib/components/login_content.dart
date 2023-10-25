@@ -53,12 +53,14 @@ class _LoginContentState extends State<LoginContent>
     );
   }
 
-  Widget loginButton(String title) {
+  Widget loginButton(String title,int status) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 135, vertical: 16),
       child: ElevatedButton(
         onPressed: () {
-          Navigator.push(context,MaterialPageRoute(builder: (context) =>HomePage()));
+          if(status == 0){
+            Navigator.push(context,MaterialPageRoute(builder: (context) =>HomePage()));
+          }
         },
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.symmetric(vertical: 14),
@@ -132,14 +134,14 @@ class _LoginContentState extends State<LoginContent>
     createAccountContent = [
       inputField('Email', Ionicons.mail_outline),
       inputField('Password', Ionicons.lock_closed_outline),
-      loginButton('Sign Up'),
+      loginButton('Sign Up',1),
       orDivider(),
     ];
 
     loginContent = [
       inputField('Email', Ionicons.mail_outline),
       inputField('Password', Ionicons.lock_closed_outline),
-      loginButton('Log In'),
+      loginButton('Log In',0),
       forgotPassword(),
     ];
 
