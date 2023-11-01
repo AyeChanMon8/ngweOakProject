@@ -1,6 +1,7 @@
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:ngwe_oak_project/components/drawer.dart';
+import 'package:ngwe_oak_project/pages/main_home_page.dart';
 import 'package:ngwe_oak_project/utils/constants.dart';
 
 class HomePage extends StatefulWidget {
@@ -12,12 +13,19 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var _selectedTab = _SelectedTab.home;
-
+  int selectedPage = 0;
   void _handleIndexChanged(int i) {
     setState(() {
       _selectedTab = _SelectedTab.values[i];
     });
   }
+
+  final _pageOptions = [
+    MainHomePage(),
+    MainHomePage(),
+    MainHomePage(),
+    MainHomePage()
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +34,11 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
           centerTitle: true,
           title: const Text(
-            'Ngwe Oak',
+            'Test',
           ),
           backgroundColor: kPrimaryColor,
         ),
+        body: _pageOptions[selectedPage],
         backgroundColor: kBackgroundColor,
         bottomNavigationBar: Padding(
           padding: EdgeInsets.only(bottom: 10),
