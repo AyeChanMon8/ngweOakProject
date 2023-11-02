@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:ngwe_oak_project/pages/cash_sale/cash_sale_create_page.dart';
 import 'package:ngwe_oak_project/utils/constants.dart';
 class CashSaleListPage extends StatefulWidget {
   const CashSaleListPage({ Key? key }) : super(key: key);
@@ -27,7 +29,7 @@ class _CashSaleListPageState extends State<CashSaleListPage> {
           ),
           backgroundColor: kPrimaryColor,
           onPressed: () {
-            
+            Get.to(CashSaleCreatePage());
           }),
     );
   }
