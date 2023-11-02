@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:flutter/material.dart';
 import 'package:ngwe_oak_project/components/login_content.dart';
 import 'dart:math' as math;
@@ -5,7 +6,6 @@ import 'dart:math' as math;
 import 'package:ngwe_oak_project/widget/center_widget.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({ Key? key }) : super(key: key);
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();

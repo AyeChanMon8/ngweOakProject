@@ -1,4 +1,4 @@
-import 'package:dot_navigation_bar/dot_navigation_bar.dart';
+// @dart=2.9
 import 'package:flutter/material.dart';
 import 'package:ngwe_oak_project/components/drawer.dart';
 import 'package:ngwe_oak_project/pages/main_home_page.dart';
@@ -7,7 +7,6 @@ import 'package:ngwe_oak_project/utils/constants.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();

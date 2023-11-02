@@ -1,6 +1,6 @@
+// @dart=2.9
 import 'package:flutter/material.dart';
 class StockReportPage extends StatefulWidget {
-  const StockReportPage({ Key? key }) : super(key: key);
 
   @override
   State<StockReportPage> createState() => _StockReportPageState();
