@@ -61,7 +61,65 @@ class _CashSaleCreatePageState extends State<CashSaleCreatePage> {
                   ),
                 ),
               ),
-              // travelTypeDropDown(),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                margin:
+                    EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
+                child: Theme(
+                  data: new ThemeData(
+                    primaryColor: kPrimaryColor,
+                  ),
+                  child: TextField(
+                    enabled: false,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: ('Pricelist'),
+                    ),
+                    onChanged: null,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                margin:
+                    EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
+                child: Theme(
+                  data: new ThemeData(
+                    primaryColor: kPrimaryColor,
+                  ),
+                  child: TextField(
+                    enabled: false,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: ('Payment Terms'),
+                    ),
+                    onChanged: null,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                margin:
+                    EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
+                child: Theme(
+                  data: new ThemeData(
+                    primaryColor: kPrimaryColor,
+                  ),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: ('Payment Journal'),
+                    ),
+                    onChanged: null,
+                  ),
+                ),
+              ),
               SizedBox(
                 height: 20,
               ),
@@ -146,16 +204,25 @@ class _CashSaleCreatePageState extends State<CashSaleCreatePage> {
                                         ),
                                         Padding(
                                           padding: EdgeInsets.only(top: 8.0),
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              border: Border.all(width: 1,
-                                              color: Colors.grey)
+                                          child: TextField(
+                                            enabled: false,
+                                            decoration: InputDecoration(
+                                              border: OutlineInputBorder(),
+                                              hintText: ('Tax 15.00%'),
                                             ),
-                                            child: Text('Tax 15.00%')),
+                                            onChanged: null,
+                                          ),
                                         ),
                                         Padding(
                                           padding: EdgeInsets.only(top: 8.0),
-                                          child: Text('100,000'),
+                                          child: TextField(
+                                            enabled: false,
+                                            decoration: InputDecoration(
+                                              border: OutlineInputBorder(),
+                                              hintText: ('100,000'),
+                                            ),
+                                            onChanged: null,
+                                          ),
                                         ),
                                         Padding(
                                           padding:
@@ -446,25 +513,21 @@ class _CashSaleCreatePageState extends State<CashSaleCreatePage> {
               //     ),
               //   ),
               // ),
-              // Align(
-              //   alignment: Alignment.bottomCenter,
-              //   child: Obx(
-              //     () => Container(
-              //       width: double.infinity,
-              //       height: 45,
-              //       margin: EdgeInsets.only(left: 10, right: 10, top: 20),
-              //       child: controller.submit_btn_show.value
-              //           ? GFButton(
-              //               color: textFieldTapColor,
-              //               onPressed: () {},
-              //               text: "Submit",
-              //               blockButton: true,
-              //               size: GFSize.LARGE,
-              //             )
-              //           : new Container(),
-              //     ),
-              //   ),
-              // ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                    width: double.infinity,
+                    height: 45,
+                    margin: EdgeInsets.only(left: 10, right: 10, top: 20),
+                    child: GFButton(
+                            color: kPrimaryColor,
+                            onPressed: () {},
+                            text: "Save",
+                            blockButton: true,
+                            size: GFSize.LARGE,
+                          )
+                  ),
+              ),
             ],
           ),
         ),
