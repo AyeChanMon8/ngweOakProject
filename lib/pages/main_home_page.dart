@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ngwe_oak_project/pages/cash_sale/cash_sale_list_page.dart';
+import 'package:ngwe_oak_project/pages/credit_sale/credit_sale_create_page.dart';
 import 'package:ngwe_oak_project/utils/constants.dart';
 import 'package:ngwe_oak_project/utils/my_style.dart';
 class MainHomePage extends StatefulWidget {
@@ -15,7 +16,7 @@ class _MainHomePageState extends State<MainHomePage> {
   final controller = ScrollController();
   List admin = [
     [Icons.monetization_on, 'Cash Sale',CashSaleListPage()],
-    [Icons.receipt, 'Credit Sale'],
+    [Icons.receipt, 'Credit Sale',CreditSaleCreatePage()],
     [Icons.description, 'Stock Request'],
     [Icons.account_balance_wallet, 'Expense Request'],
     [Icons.money, 'Cash Amount To Paid'],
