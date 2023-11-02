@@ -1,6 +1,7 @@
 // @dart=2.9
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ngwe_oak_project/pages/cash_sale/cash_sale_list_page.dart';
 import 'package:ngwe_oak_project/utils/constants.dart';
 import 'package:ngwe_oak_project/utils/my_style.dart';
 class MainHomePage extends StatefulWidget {
@@ -13,7 +14,7 @@ class _MainHomePageState extends State<MainHomePage> {
   final numbers = List.generate(6, (index) => '$index');
   final controller = ScrollController();
   List admin = [
-    [Icons.monetization_on, 'Cash Sale'],
+    [Icons.monetization_on, 'Cash Sale',CashSaleListPage()],
     [Icons.receipt, 'Credit Sale'],
     [Icons.description, 'Stock Request'],
     [Icons.account_balance_wallet, 'Expense Request'],
@@ -54,7 +55,7 @@ class _MainHomePageState extends State<MainHomePage> {
                           icon: Icon(admin[index][0]),
                           color: Colors.white,
                           onPressed: () {
-                            Get.toNamed(admin[index][2]);
+                            Get.to(admin[index][2]);
                           },
                         ),
                       ),

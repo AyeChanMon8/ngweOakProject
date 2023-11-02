@@ -57,14 +57,14 @@ class _HomePageState extends State<HomePage> {
             ),
 
             SalomonBottomBarItem(
-              icon: Icon(Icons.report_off),
+              icon: Icon(Icons.library_books),
               title: Text("Stock Report"),
               selectedColor: kPrimaryColor,
             ),
 
             /// Likes
             SalomonBottomBarItem(
-              icon: Icon(Icons.favorite_border),
+              icon: Icon(Icons.list),
               title: Text("Open/Due List"),
               selectedColor: kPrimaryColor,
             ),
