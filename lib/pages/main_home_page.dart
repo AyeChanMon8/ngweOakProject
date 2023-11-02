@@ -20,10 +20,10 @@ class _MainHomePageState extends State<MainHomePage> {
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: 1,
-          mainAxisSpacing: 8,
-          crossAxisSpacing: 8,
+          mainAxisSpacing: 10,
+          crossAxisSpacing: 10,
         ),
-        padding: const EdgeInsets.all(4),
+        padding: const EdgeInsets.all(10),
         controller: controller,
         itemCount: numbers.length,
         itemBuilder: (context, index) {
@@ -37,16 +37,8 @@ class _MainHomePageState extends State<MainHomePage> {
         padding: EdgeInsets.all(16),
         color: Colors.orange,
         child: GridTile(
-          header: Text(
-            'Header $number',
-            textAlign: TextAlign.center,
-          ),
           child: Center(
-            child: Text(
-              number,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 48),
-              textAlign: TextAlign.center,
-            ),
+            child: Image.asset('assets/images/Pos.jpeg')
           ),
           footer: Text(
             'Footer $number',

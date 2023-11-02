@@ -2,7 +2,9 @@ import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:ngwe_oak_project/components/drawer.dart';
 import 'package:ngwe_oak_project/pages/main_home_page.dart';
+import 'package:ngwe_oak_project/pages/stock_report_page.dart';
 import 'package:ngwe_oak_project/utils/constants.dart';
+import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -17,11 +19,13 @@ class _HomePageState extends State<HomePage> {
   void _handleIndexChanged(int i) {
     setState(() {
       _selectedTab = _SelectedTab.values[i];
+      selectedPage = i;
     });
   }
 
   final _pageOptions = [
     MainHomePage(),
+    StockReportPage(),
     MainHomePage(),
     MainHomePage(),
     MainHomePage()
@@ -34,33 +38,52 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
           centerTitle: true,
           title: const Text(
-            'Test',
+            'Ngwe Oak',
           ),
           backgroundColor: kPrimaryColor,
         ),
         body: _pageOptions[selectedPage],
         backgroundColor: kBackgroundColor,
-        bottomNavigationBar: Padding(
-          padding: EdgeInsets.only(bottom: 10),
-          child: DotNavigationBar(
-            margin: EdgeInsets.only(left: 10, right: 10),
-            currentIndex: _SelectedTab.values.indexOf(_selectedTab),
-            dotIndicatorColor: Colors.black,
-            unselectedItemColor: Colors.grey[300],
-            onTap: _handleIndexChanged,
-            items: [
-              DotNavigationBarItem(
-                  icon: Icon(Icons.home), selectedColor: kPrimaryColor),
-              DotNavigationBarItem(
-                  icon: Icon(Icons.favorite), selectedColor: kPrimaryColor),
-              DotNavigationBarItem(
-                  icon: Icon(Icons.search), selectedColor: kPrimaryColor),
-              DotNavigationBarItem(
-                  icon: Icon(Icons.person), selectedColor: kPrimaryColor)
-            ],
-          ),
-        ));
+        bottomNavigationBar: SalomonBottomBar(
+          currentIndex: _SelectedTab.values.indexOf(_selectedTab),
+          onTap: (i) => setState(() => _handleIndexChanged(i)),
+          items: [
+            SalomonBottomBarItem(
+              icon: Icon(Icons.home),
+              title: Text("Home"),
+              selectedColor: kPrimaryColor,
+            ),
+
+            SalomonBottomBarItem(
+              icon: Icon(Icons.report_off),
+              title: Text("Stock Report"),
+              selectedColor: kPrimaryColor,
+            ),
+
+            /// Likes
+            SalomonBottomBarItem(
+              icon: Icon(Icons.favorite_border),
+              title: Text("Open/Due List"),
+              selectedColor: kPrimaryColor,
+            ),
+
+            /// Search
+            SalomonBottomBarItem(
+              icon: Icon(Icons.report),
+              title: Text("Reporting"),
+              selectedColor: kPrimaryColor,
+            ),
+
+            /// Profile
+            SalomonBottomBarItem(
+              icon: Icon(Icons.announcement),
+              title: Text("Announcement"),
+              selectedColor: kPrimaryColor,
+            ),
+          ],
+        ),
+      );
   }
 }
 
-enum _SelectedTab { home, favorite, search, person }
+enum _SelectedTab { home, report_off, favorite_border, report,announcement }
