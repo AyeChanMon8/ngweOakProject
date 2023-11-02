@@ -1,6 +1,7 @@
 // @dart=2.9
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ngwe_oak_project/utils/constants.dart';
 import 'package:ngwe_oak_project/utils/my_style.dart';
 class MainHomePage extends StatefulWidget {
 
@@ -12,11 +13,11 @@ class _MainHomePageState extends State<MainHomePage> {
   final numbers = List.generate(6, (index) => '$index');
   final controller = ScrollController();
   List admin = [
-    [Icons.calendar_today, 'Cash Sale'],
-    [Icons.calendar_today, 'Credit Sale'],
-    [Icons.calendar_today, 'Stock Request'],
-    [Icons.calendar_today, 'Expense Request'],
-    [Icons.calendar_today, 'Cash Amount To Paid'],
+    [Icons.monetization_on, 'Cash Sale'],
+    [Icons.receipt, 'Credit Sale'],
+    [Icons.description, 'Stock Request'],
+    [Icons.account_balance_wallet, 'Expense Request'],
+    [Icons.money, 'Cash Amount To Paid'],
   ];
   @override
   Widget build(BuildContext context) {
@@ -46,19 +47,13 @@ class _MainHomePageState extends State<MainHomePage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Card(
-                        color: Color.fromRGBO(58, 47, 112, 1),
-                        // radius: circleAvatorRadius,
+                        color: kSPrimaryColor,
                         child: IconButton(
                           iconSize: 17,
                           padding: EdgeInsets.zero,
                           icon: Icon(admin[index][0]),
                           color: Colors.white,
                           onPressed: () {
-                            // Navigator.of(context).push(
-                            //     MaterialPageRoute(builder: (BuildContext context) {
-                            //   return LeaveTripReport();
-                            // }));
-
                             Get.toNamed(admin[index][2]);
                           },
                         ),

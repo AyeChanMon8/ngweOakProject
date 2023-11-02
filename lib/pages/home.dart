@@ -1,7 +1,10 @@
 // @dart=2.9
 import 'package:flutter/material.dart';
 import 'package:ngwe_oak_project/components/drawer.dart';
+import 'package:ngwe_oak_project/pages/announcement_home_page.dart';
 import 'package:ngwe_oak_project/pages/main_home_page.dart';
+import 'package:ngwe_oak_project/pages/open_due_list_page.dart';
+import 'package:ngwe_oak_project/pages/reporting_home_page.dart';
 import 'package:ngwe_oak_project/pages/stock_report_page.dart';
 import 'package:ngwe_oak_project/utils/constants.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
@@ -25,9 +28,9 @@ class _HomePageState extends State<HomePage> {
   final _pageOptions = [
     MainHomePage(),
     StockReportPage(),
-    MainHomePage(),
-    MainHomePage(),
-    MainHomePage()
+    OpenDueListPage(),
+    ReportingHomePage(),
+    AnnouncementHomePage()
   ];
 
   @override
