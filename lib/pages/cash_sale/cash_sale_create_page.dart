@@ -31,33 +31,39 @@ class _CashSaleCreatePageState extends State<CashSaleCreatePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
+                height: 59,
                 margin:
                     EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
                 child: Theme(
                   data: new ThemeData(
                     primaryColor: kPrimaryColor,
                   ),
-                  child: DropdownButton<String>(
-                    isExpanded: true,
-                    // Step 3.
-                    value: dropdownValue,
-                    // Step 4.
-                    items: <String>['Aye Aye', 'Mg Mg', 'Saw Saw', 'Waddy']
-                        .map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(
-                          value,
-                          style: TextStyle(fontSize: 16),
-                        ),
-                      );
-                    }).toList(),
-                    // Step 5.
-                    onChanged: (String newValue) {
-                      setState(() {
-                        dropdownValue = newValue;
-                      });
-                    },
+                  child: InputDecorator(
+                    decoration: const InputDecoration(border: OutlineInputBorder()),
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton<String>(
+                        isExpanded: true,
+                        // Step 3.
+                        value: dropdownValue,
+                        // Step 4.
+                        items: <String>['Aye Aye', 'Mg Mg', 'Saw Saw', 'Waddy']
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(
+                              value,
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          );
+                        }).toList(),
+                        // Step 5.
+                        onChanged: (String newValue) {
+                          setState(() {
+                            dropdownValue = newValue;
+                          });
+                        },
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -152,34 +158,40 @@ class _CashSaleCreatePageState extends State<CashSaleCreatePage> {
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
                                       children: <Widget>[
-                                        Padding(
+                                        Container(
+                                          height: 70,
                                           padding: EdgeInsets.only(top: 8.0),
-                                          child: DropdownButton<String>(
-                                            isExpanded: true,
-                                            // Step 3.
-                                            value: productDropdownValue,
-                                            // Step 4.
-                                            items: <String>[
-                                              'Coca-Cola',
-                                              'Sunkist',
-                                              'Max',
-                                            ].map<DropdownMenuItem<String>>(
-                                                (String value) {
-                                              return DropdownMenuItem<String>(
-                                                value: value,
-                                                child: Text(
-                                                  value,
-                                                  style:
-                                                      TextStyle(fontSize: 16),
-                                                ),
-                                              );
-                                            }).toList(),
-                                            // Step 5.
-                                            onChanged: (String newValue) {
-                                              setState(() {
-                                                productDropdownValue = newValue;
-                                              });
-                                            },
+                                          child: InputDecorator(
+                                            decoration: const InputDecoration(border: OutlineInputBorder()),
+                                            child: DropdownButtonHideUnderline(
+                                              child: DropdownButton<String>(
+                                                isExpanded: true,
+                                                // Step 3.
+                                                value: productDropdownValue,
+                                                // Step 4.
+                                                items: <String>[
+                                                  'Coca-Cola',
+                                                  'Sunkist',
+                                                  'Max',
+                                                ].map<DropdownMenuItem<String>>(
+                                                    (String value) {
+                                                  return DropdownMenuItem<String>(
+                                                    value: value,
+                                                    child: Text(
+                                                      value,
+                                                      style:
+                                                          TextStyle(fontSize: 16),
+                                                    ),
+                                                  );
+                                                }).toList(),
+                                                // Step 5.
+                                                onChanged: (String newValue) {
+                                                  setState(() {
+                                                    productDropdownValue = newValue;
+                                                  });
+                                                },
+                                              ),
+                                            ),
                                           ),
                                         ),
                                         Padding(
@@ -236,6 +248,7 @@ class _CashSaleCreatePageState extends State<CashSaleCreatePage> {
                                               // saveTraveline();
                                             },
                                             text: "Add",
+                                            color: kButtonColor,
                                             blockButton: true,
                                             size: GFSize.LARGE,
                                           ),
@@ -250,7 +263,7 @@ class _CashSaleCreatePageState extends State<CashSaleCreatePage> {
                         });
                   },
                   text: 'Add Order Lines',
-                  color: kPrimaryColor,
+                  color: kButtonColor,
                   icon: Icon(
                     Icons.add,
                     color: Colors.white,
@@ -520,13 +533,12 @@ class _CashSaleCreatePageState extends State<CashSaleCreatePage> {
                     height: 45,
                     margin: EdgeInsets.only(left: 10, right: 10, top: 20),
                     child: GFButton(
-                            color: kPrimaryColor,
-                            onPressed: () {},
-                            text: "Save",
-                            blockButton: true,
-                            size: GFSize.LARGE,
-                          )
-                  ),
+                      color: kButtonColor,
+                      onPressed: () {},
+                      text: "Save",
+                      blockButton: true,
+                      size: GFSize.LARGE,
+                    )),
               ),
             ],
           ),
