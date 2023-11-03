@@ -1,6 +1,9 @@
 // @dart=2.9
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:ngwe_oak_project/utils/constants.dart';
@@ -13,10 +16,28 @@ class CreditSaleCreatePage extends StatefulWidget {
 class _CreditSaleCreatePageState extends State<CreditSaleCreatePage> {
   final _formKey = GlobalKey<FormState>();
   final _formKeyParent = GlobalKey<FormState>();
-  String dropdownValue = 'Aye Aye';
+  String dropdownValue;
   String productDropdownValue = 'Coca-Cola';
+  List catalogdata;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    this.loadData();
+    super.initState();
+  }
+
+  Future<String> loadData() async {
+    var data = await rootBundle.loadString("assets/json/customer.json");
+    setState(() {
+      this.catalogdata = json.decode(data);
+    });
+    return "success";
+  }
+
   @override
   Widget build(BuildContext context) {
+    print(this.catalogdata);
     return Scaffold(
       appBar: AppBar(
           backgroundColor: kPrimaryColor,
@@ -30,7 +51,7 @@ class _CreditSaleCreatePageState extends State<CreditSaleCreatePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
+              this.catalogdata!=null ?Container(
                 height: 59,
                 margin:
                     EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
@@ -39,34 +60,28 @@ class _CreditSaleCreatePageState extends State<CreditSaleCreatePage> {
                     primaryColor: kPrimaryColor,
                   ),
                   child: InputDecorator(
-                    decoration: const InputDecoration(border: OutlineInputBorder()),
+                    decoration:
+                        const InputDecoration(border: OutlineInputBorder()),
                     child: DropdownButtonHideUnderline(
-                      child: DropdownButton<String>(
-                        isExpanded: true,
-                        // Step 3.
-                        value: dropdownValue,
-                        // Step 4.
-                        items: <String>['Aye Aye', 'Mg Mg', 'Saw Saw', 'Waddy']
-                            .map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(
-                              value,
-                              style: TextStyle(fontSize: 16),
-                            ),
+                      child: DropdownButton(
+                        items: this.catalogdata.map((item) {
+                          return new DropdownMenuItem(
+                            child: new Text(item['name']),
+                            value: item['id'].toString(),
                           );
                         }).toList(),
-                        // Step 5.
-                        onChanged: (String newValue) {
+                        onChanged: (newVal) {
                           setState(() {
-                            dropdownValue = newValue;
+                            dropdownValue = newVal;
                           });
                         },
+                        value: dropdownValue,
                       ),
                     ),
                   ),
                 ),
-              ),
+              ):SizedBox(),
+
               SizedBox(
                 height: 10,
               ),
@@ -143,7 +158,8 @@ class _CreditSaleCreatePageState extends State<CreditSaleCreatePage> {
                                           height: 70,
                                           padding: EdgeInsets.only(top: 8.0),
                                           child: InputDecorator(
-                                            decoration: const InputDecoration(border: OutlineInputBorder()),
+                                            decoration: const InputDecoration(
+                                                border: OutlineInputBorder()),
                                             child: DropdownButtonHideUnderline(
                                               child: DropdownButton<String>(
                                                 isExpanded: true,
@@ -156,19 +172,21 @@ class _CreditSaleCreatePageState extends State<CreditSaleCreatePage> {
                                                   'Max',
                                                 ].map<DropdownMenuItem<String>>(
                                                     (String value) {
-                                                  return DropdownMenuItem<String>(
+                                                  return DropdownMenuItem<
+                                                      String>(
                                                     value: value,
                                                     child: Text(
                                                       value,
-                                                      style:
-                                                          TextStyle(fontSize: 16),
+                                                      style: TextStyle(
+                                                          fontSize: 16),
                                                     ),
                                                   );
                                                 }).toList(),
                                                 // Step 5.
                                                 onChanged: (String newValue) {
                                                   setState(() {
-                                                    productDropdownValue = newValue;
+                                                    productDropdownValue =
+                                                        newValue;
                                                   });
                                                 },
                                               ),
@@ -514,13 +532,12 @@ class _CreditSaleCreatePageState extends State<CreditSaleCreatePage> {
                     height: 45,
                     margin: EdgeInsets.only(left: 10, right: 10, top: 20),
                     child: GFButton(
-                            color: kButtonColor,
-                            onPressed: () {},
-                            text: "Save",
-                            blockButton: true,
-                            size: GFSize.LARGE,
-                          )
-                  ),
+                      color: kButtonColor,
+                      onPressed: () {},
+                      text: "Save",
+                      blockButton: true,
+                      size: GFSize.LARGE,
+                    )),
               ),
             ],
           ),
