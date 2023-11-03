@@ -51,10 +51,10 @@ class _MainHomePageState extends State<MainHomePage> {
                       Card(
                         color: kSPrimaryColor,
                         child: IconButton(
-                          iconSize: 17,
+                          iconSize: 20,
                           padding: EdgeInsets.zero,
                           icon: Icon(admin[index][0]),
-                          color: Colors.white,
+                          color: kPrimaryColor,
                           onPressed: () {
                             Get.to(admin[index][2]);
                           },

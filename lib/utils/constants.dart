@@ -6,4 +6,4 @@ const kPrimaryColor = Color(0xFF6E1A0C);
 const kSecondaryColor = Color(0xFF265DAB);
 const kWhiteColor = Color(0xFFffffff);
 const kLabelColor = Color(0xFFbf0603);
-const kSPrimaryColor = Color(0xFFbf7b60);
+const kSPrimaryColor = Color(0xFFC0C0C0);

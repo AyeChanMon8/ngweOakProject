@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ngwe_oak_project/pages/system/login_screen.dart';
 
+import 'connection_page.dart';
+
 void main() {
   runApp(MyApp());
 }
