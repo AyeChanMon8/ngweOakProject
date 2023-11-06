@@ -1,14 +1,20 @@
 [
 	{
 		"id": 1,
-		"name": "Aye Aye"
+		"name": "Aye Aye",
+		"pricelist":"Public Price (MMK)",
+		"payment_terms": "15 days"
 	},
     {
 		"id": 2,
-		"name": "Khant Khant"
+		"name": "Khant Khant",
+		"pricelist":"Public Price (MMK)",
+		"payment_terms": "15 days"
 	},
     {
 		"id": 3,
-		"name": "Myint Myint"
+		"name": "Myint Myint",
+		"pricelist":"Public Price (MMK)",
+		"payment_terms": "15 days"
 	}
 ]

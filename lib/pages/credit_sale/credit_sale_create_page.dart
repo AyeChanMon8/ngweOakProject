@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:ngwe_oak_project/controllers/credit_sale_controller.dart';
 import 'package:ngwe_oak_project/utils/constants.dart';
 
 class CreditSaleCreatePage extends StatefulWidget {
@@ -14,6 +15,9 @@ class CreditSaleCreatePage extends StatefulWidget {
 }
 
 class _CreditSaleCreatePageState extends State<CreditSaleCreatePage> {
+  final CreditSaleController controller =
+      Get.put(CreditSaleController());
+
   final _formKey = GlobalKey<FormState>();
   final _formKeyParent = GlobalKey<FormState>();
   String dropdownValue;
@@ -23,7 +27,7 @@ class _CreditSaleCreatePageState extends State<CreditSaleCreatePage> {
   @override
   void initState() {
     // TODO: implement initState
-    this.loadData();
+    //this.loadData();
     super.initState();
   }
 
@@ -51,7 +55,8 @@ class _CreditSaleCreatePageState extends State<CreditSaleCreatePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              this.catalogdata!=null ?Container(
+              Obx(
+                        () => Container(
                 height: 59,
                 margin:
                     EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
@@ -64,10 +69,10 @@ class _CreditSaleCreatePageState extends State<CreditSaleCreatePage> {
                         const InputDecoration(border: OutlineInputBorder()),
                     child: DropdownButtonHideUnderline(
                       child: DropdownButton(
-                        items: this.catalogdata.map((item) {
+                        items: controller.customerList.map((item) {
                           return new DropdownMenuItem(
-                            child: new Text(item['name']),
-                            value: item['id'].toString(),
+                            child: new Text(item.name),
+                            value: item.id.toString(),
                           );
                         }).toList(),
                         onChanged: (newVal) {
@@ -80,7 +85,7 @@ class _CreditSaleCreatePageState extends State<CreditSaleCreatePage> {
                     ),
                   ),
                 ),
-              ):SizedBox(),
+              )),
 
               SizedBox(
                 height: 10,
