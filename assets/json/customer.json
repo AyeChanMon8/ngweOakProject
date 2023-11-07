@@ -8,13 +8,13 @@
     {
 		"id": 2,
 		"name": "Khant Khant",
-		"pricelist":"Public Price (MMK)",
-		"payment_terms": "15 days"
+		"pricelist":"Public Price (USD)",
+		"payment_terms": "13 days"
 	},
     {
 		"id": 3,
 		"name": "Myint Myint",
-		"pricelist":"Public Price (MMK)",
-		"payment_terms": "15 days"
+		"pricelist":"Public Price (SGD)",
+		"payment_terms": "12 days"
 	}
 ]

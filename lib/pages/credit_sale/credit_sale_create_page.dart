@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:ngwe_oak_project/controllers/credit_sale_controller.dart';
+import 'package:ngwe_oak_project/models/customer.dart';
 import 'package:ngwe_oak_project/utils/constants.dart';
 
 class CreditSaleCreatePage extends StatefulWidget {
@@ -68,20 +69,46 @@ class _CreditSaleCreatePageState extends State<CreditSaleCreatePage> {
                     decoration:
                         const InputDecoration(border: OutlineInputBorder()),
                     child: DropdownButtonHideUnderline(
-                      child: DropdownButton(
-                        items: controller.customerList.map((item) {
-                          return new DropdownMenuItem(
-                            child: new Text(item.name),
-                            value: item.id.toString(),
-                          );
-                        }).toList(),
-                        onChanged: (newVal) {
-                          setState(() {
-                            dropdownValue = newVal;
-                          });
+                      // child: DropdownButton(
+                      //   items: controller.customerList.map((item) {
+                      //     return new DropdownMenuItem(
+                      //       child: new Text(item.name),
+                      //       value: item.id.toString(),
+                      //     );
+                      //   }).toList(),
+                      //   onChanged: (newVal) {
+                      //     setState(() {
+                      //       dropdownValue = newVal;
+                      //     });
+                      //   },
+                      //   value: dropdownValue,
+                      // ),
+                      child: DropdownButton<Customer>(
+                        hint: Container(
+                            padding: EdgeInsets.only(left: 20),
+                            child: Text(
+                              "Expense Category",
+                            )),
+                        value: controller.selectedCustomer,
+                        icon: Icon(Icons.keyboard_arrow_down),
+                        iconSize: 30,
+                        isExpanded: true,
+                        onChanged: (Customer value) {
+                          controller.onChangeCustomerDropdown(value);
                         },
-                        value: dropdownValue,
-                      ),
+                        items: controller.customerList
+                            .map((Customer customer) {
+                          return DropdownMenuItem<Customer>(
+                            value: customer,
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Text(
+                                customer.name,
+                                style: TextStyle(),
+                              ),
+                            ),
+                          );
+                        }).toList()),
                     ),
                   ),
                 ),
@@ -98,6 +125,7 @@ class _CreditSaleCreatePageState extends State<CreditSaleCreatePage> {
                     primaryColor: kPrimaryColor,
                   ),
                   child: TextField(
+                    controller: controller.priceListController,
                     enabled: false,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
@@ -118,6 +146,7 @@ class _CreditSaleCreatePageState extends State<CreditSaleCreatePage> {
                     primaryColor: kPrimaryColor,
                   ),
                   child: TextField(
+                    controller: controller.paymentTermsController,
                     enabled: false,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
