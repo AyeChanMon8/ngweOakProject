@@ -1,8 +1,13 @@
 // @dart=2.9
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:ngwe_oak_project/controllers/cash_sale_controller.dart';
+import 'package:ngwe_oak_project/models/customer.dart';
 import 'package:ngwe_oak_project/utils/constants.dart';
 
 class CashSaleCreatePage extends StatefulWidget {
@@ -11,12 +16,33 @@ class CashSaleCreatePage extends StatefulWidget {
 }
 
 class _CashSaleCreatePageState extends State<CashSaleCreatePage> {
+  final CashSaleController controller =
+      Get.put(CashSaleController());
+
   final _formKey = GlobalKey<FormState>();
   final _formKeyParent = GlobalKey<FormState>();
-  String dropdownValue = 'Aye Aye';
+  String dropdownValue;
   String productDropdownValue = 'Coca-Cola';
+  List catalogdata;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    //this.loadData();
+    super.initState();
+  }
+
+  Future<String> loadData() async {
+    var data = await rootBundle.loadString("assets/json/customer.json");
+    setState(() {
+      this.catalogdata = json.decode(data);
+    });
+    return "success";
+  }
+
   @override
   Widget build(BuildContext context) {
+    print(this.catalogdata);
     return Scaffold(
       appBar: AppBar(
           backgroundColor: kPrimaryColor,
@@ -30,7 +56,8 @@ class _CashSaleCreatePageState extends State<CashSaleCreatePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
+              Obx(
+                        () => Container(
                 height: 59,
                 margin:
                     EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
@@ -39,34 +66,54 @@ class _CashSaleCreatePageState extends State<CashSaleCreatePage> {
                     primaryColor: kPrimaryColor,
                   ),
                   child: InputDecorator(
-                    decoration: const InputDecoration(border: OutlineInputBorder()),
+                    decoration:
+                        const InputDecoration(border: OutlineInputBorder()),
                     child: DropdownButtonHideUnderline(
-                      child: DropdownButton<String>(
-                        isExpanded: true,
-                        // Step 3.
-                        value: dropdownValue,
-                        // Step 4.
-                        items: <String>['Aye Aye', 'Mg Mg', 'Saw Saw', 'Waddy']
-                            .map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
+                      // child: DropdownButton(
+                      //   items: controller.customerList.map((item) {
+                      //     return new DropdownMenuItem(
+                      //       child: new Text(item.name),
+                      //       value: item.id.toString(),
+                      //     );
+                      //   }).toList(),
+                      //   onChanged: (newVal) {
+                      //     setState(() {
+                      //       dropdownValue = newVal;
+                      //     });
+                      //   },
+                      //   value: dropdownValue,
+                      // ),
+                      child: DropdownButton<Customer>(
+                        hint: Container(
+                            padding: EdgeInsets.only(left: 20),
                             child: Text(
-                              value,
-                              style: TextStyle(fontSize: 16),
+                              "Expense Category",
+                            )),
+                        value: controller.selectedCustomer,
+                        icon: Icon(Icons.keyboard_arrow_down),
+                        iconSize: 30,
+                        isExpanded: true,
+                        onChanged: (Customer value) {
+                          controller.onChangeCustomerDropdown(value);
+                        },
+                        items: controller.customerList
+                            .map((Customer customer) {
+                          return DropdownMenuItem<Customer>(
+                            value: customer,
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Text(
+                                customer.name,
+                                style: TextStyle(),
+                              ),
                             ),
                           );
-                        }).toList(),
-                        // Step 5.
-                        onChanged: (String newValue) {
-                          setState(() {
-                            dropdownValue = newValue;
-                          });
-                        },
-                      ),
+                        }).toList()),
                     ),
                   ),
                 ),
-              ),
+              )),
+
               SizedBox(
                 height: 10,
               ),
@@ -78,6 +125,7 @@ class _CashSaleCreatePageState extends State<CashSaleCreatePage> {
                     primaryColor: kPrimaryColor,
                   ),
                   child: TextField(
+                    controller: controller.priceListController,
                     enabled: false,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
@@ -98,29 +146,11 @@ class _CashSaleCreatePageState extends State<CashSaleCreatePage> {
                     primaryColor: kPrimaryColor,
                   ),
                   child: TextField(
+                    controller: controller.paymentTermsController,
                     enabled: false,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: ('Payment Terms'),
-                    ),
-                    onChanged: null,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                margin:
-                    EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
-                child: Theme(
-                  data: new ThemeData(
-                    primaryColor: kPrimaryColor,
-                  ),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: ('Payment Journal'),
                     ),
                     onChanged: null,
                   ),
@@ -162,7 +192,8 @@ class _CashSaleCreatePageState extends State<CashSaleCreatePage> {
                                           height: 70,
                                           padding: EdgeInsets.only(top: 8.0),
                                           child: InputDecorator(
-                                            decoration: const InputDecoration(border: OutlineInputBorder()),
+                                            decoration: const InputDecoration(
+                                                border: OutlineInputBorder()),
                                             child: DropdownButtonHideUnderline(
                                               child: DropdownButton<String>(
                                                 isExpanded: true,
@@ -175,19 +206,21 @@ class _CashSaleCreatePageState extends State<CashSaleCreatePage> {
                                                   'Max',
                                                 ].map<DropdownMenuItem<String>>(
                                                     (String value) {
-                                                  return DropdownMenuItem<String>(
+                                                  return DropdownMenuItem<
+                                                      String>(
                                                     value: value,
                                                     child: Text(
                                                       value,
-                                                      style:
-                                                          TextStyle(fontSize: 16),
+                                                      style: TextStyle(
+                                                          fontSize: 16),
                                                     ),
                                                   );
                                                 }).toList(),
                                                 // Step 5.
                                                 onChanged: (String newValue) {
                                                   setState(() {
-                                                    productDropdownValue = newValue;
+                                                    productDropdownValue =
+                                                        newValue;
                                                   });
                                                 },
                                               ),
@@ -248,8 +281,8 @@ class _CashSaleCreatePageState extends State<CashSaleCreatePage> {
                                               // saveTraveline();
                                             },
                                             text: "Add",
-                                            color: kButtonColor,
                                             blockButton: true,
+                                            color: kButtonColor,
                                             size: GFSize.LARGE,
                                           ),
                                         )
