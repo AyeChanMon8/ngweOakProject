@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'dart:convert';
 
 import 'package:ngwe_oak_project/models/customer.dart';
+import 'package:ngwe_oak_project/models/product.dart';
 
 class CashSaleService extends GetxService {
   Dio dioClient;
@@ -23,5 +24,18 @@ class CashSaleService extends GetxService {
         customerList.add(Customer.fromMap(v));
       });
     return customerList;
+  }
+
+  Future<List<Product>> getProductList(int cus_id) async {
+    var data = await rootBundle.loadString("assets/json/product.json");
+    List<Product> productList = new List<Product>();
+    List<dynamic> list = json.decode(data);
+      list.forEach((v) {
+        if(v['customer_id'] == cus_id){
+          productList.add(Product.fromMap(v));
+        }
+        
+      });
+    return productList;
   }
 }

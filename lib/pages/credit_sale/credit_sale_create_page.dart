@@ -6,8 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:ngwe_oak_project/controllers/cash_sale_controller.dart';
 import 'package:ngwe_oak_project/controllers/credit_sale_controller.dart';
 import 'package:ngwe_oak_project/models/customer.dart';
+import 'package:ngwe_oak_project/models/product.dart';
 import 'package:ngwe_oak_project/utils/constants.dart';
 
 class CreditSaleCreatePage extends StatefulWidget {
@@ -16,8 +18,7 @@ class CreditSaleCreatePage extends StatefulWidget {
 }
 
 class _CreditSaleCreatePageState extends State<CreditSaleCreatePage> {
-  final CreditSaleController controller =
-      Get.put(CreditSaleController());
+  final CreditSaleController controller = Get.put(CreditSaleController());
 
   final _formKey = GlobalKey<FormState>();
   final _formKeyParent = GlobalKey<FormState>();
@@ -47,7 +48,7 @@ class _CreditSaleCreatePageState extends State<CreditSaleCreatePage> {
       appBar: AppBar(
           backgroundColor: kPrimaryColor,
           title: Text(
-            'Credit Sale',
+            'Cash Sale',
             style: TextStyle(),
           )),
       body: Form(
@@ -56,63 +57,62 @@ class _CreditSaleCreatePageState extends State<CreditSaleCreatePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Obx(
-                        () => Container(
-                height: 59,
-                margin:
-                    EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
-                child: Theme(
-                  data: new ThemeData(
-                    primaryColor: kPrimaryColor,
-                  ),
-                  child: InputDecorator(
-                    decoration:
-                        const InputDecoration(border: OutlineInputBorder()),
-                    child: DropdownButtonHideUnderline(
-                      // child: DropdownButton(
-                      //   items: controller.customerList.map((item) {
-                      //     return new DropdownMenuItem(
-                      //       child: new Text(item.name),
-                      //       value: item.id.toString(),
-                      //     );
-                      //   }).toList(),
-                      //   onChanged: (newVal) {
-                      //     setState(() {
-                      //       dropdownValue = newVal;
-                      //     });
-                      //   },
-                      //   value: dropdownValue,
-                      // ),
-                      child: DropdownButton<Customer>(
-                        hint: Container(
-                            padding: EdgeInsets.only(left: 20),
-                            child: Text(
-                              "Expense Category",
-                            )),
-                        value: controller.selectedCustomer,
-                        icon: Icon(Icons.keyboard_arrow_down),
-                        iconSize: 30,
-                        isExpanded: true,
-                        onChanged: (Customer value) {
-                          controller.onChangeCustomerDropdown(value);
-                        },
-                        items: controller.customerList
-                            .map((Customer customer) {
-                          return DropdownMenuItem<Customer>(
-                            value: customer,
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 10),
-                              child: Text(
-                                customer.name,
-                                style: TextStyle(),
-                              ),
-                            ),
-                          );
-                        }).toList()),
+              Obx(() => Container(
+                    height: 59,
+                    margin: EdgeInsets.only(
+                        left: 10, right: 10, top: 10, bottom: 10),
+                    child: Theme(
+                      data: new ThemeData(
+                        primaryColor: kPrimaryColor,
+                      ),
+                      child: InputDecorator(
+                        decoration:
+                            const InputDecoration(border: OutlineInputBorder()),
+                        child: DropdownButtonHideUnderline(
+                          // child: DropdownButton(
+                          //   items: controller.customerList.map((item) {
+                          //     return new DropdownMenuItem(
+                          //       child: new Text(item.name),
+                          //       value: item.id.toString(),
+                          //     );
+                          //   }).toList(),
+                          //   onChanged: (newVal) {
+                          //     setState(() {
+                          //       dropdownValue = newVal;
+                          //     });
+                          //   },
+                          //   value: dropdownValue,
+                          // ),
+                          child: DropdownButton<Customer>(
+                              hint: Container(
+                                  padding: EdgeInsets.only(left: 20),
+                                  child: Text(
+                                    "Expense Category",
+                                  )),
+                              value: controller.selectedCustomer,
+                              icon: Icon(Icons.keyboard_arrow_down),
+                              iconSize: 30,
+                              isExpanded: true,
+                              onChanged: (Customer value) {
+                                controller.onChangeCustomerDropdown(value);
+                              },
+                              items: controller.customerList
+                                  .map((Customer customer) {
+                                return DropdownMenuItem<Customer>(
+                                  value: customer,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 10),
+                                    child: Text(
+                                      customer.name,
+                                      style: TextStyle(),
+                                    ),
+                                  ),
+                                );
+                              }).toList()),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              )),
+                  )),
 
               SizedBox(
                 height: 10,
@@ -195,35 +195,69 @@ class _CreditSaleCreatePageState extends State<CreditSaleCreatePage> {
                                             decoration: const InputDecoration(
                                                 border: OutlineInputBorder()),
                                             child: DropdownButtonHideUnderline(
-                                              child: DropdownButton<String>(
-                                                isExpanded: true,
-                                                // Step 3.
-                                                value: productDropdownValue,
-                                                // Step 4.
-                                                items: <String>[
-                                                  'Coca-Cola',
-                                                  'Sunkist',
-                                                  'Max',
-                                                ].map<DropdownMenuItem<String>>(
-                                                    (String value) {
-                                                  return DropdownMenuItem<
-                                                      String>(
-                                                    value: value,
-                                                    child: Text(
-                                                      value,
-                                                      style: TextStyle(
-                                                          fontSize: 16),
-                                                    ),
-                                                  );
-                                                }).toList(),
-                                                // Step 5.
-                                                onChanged: (String newValue) {
-                                                  setState(() {
-                                                    productDropdownValue =
-                                                        newValue;
-                                                  });
-                                                },
-                                              ),
+                                              // child: DropdownButton<String>(
+                                              //   isExpanded: true,
+                                              //   // Step 3.
+                                              //   value: productDropdownValue,
+                                              //   // Step 4.
+                                              //   items: <String>[
+                                              //     'Coca-Cola',
+                                              //     'Sunkist',
+                                              //     'Max',
+                                              //   ].map<DropdownMenuItem<String>>(
+                                              //       (String value) {
+                                              //     return DropdownMenuItem<
+                                              //         String>(
+                                              //       value: value,
+                                              //       child: Text(
+                                              //         value,
+                                              //         style: TextStyle(
+                                              //             fontSize: 16),
+                                              //       ),
+                                              //     );
+                                              //   }).toList(),
+                                              //   // Step 5.
+                                              //   onChanged: (String newValue) {
+                                              //     setState(() {
+                                              //       productDropdownValue =
+                                              //           newValue;
+                                              //     });
+                                              //   },
+                                              // ),
+                                              child: DropdownButton<Product>(
+                                                  hint: Container(
+                                                      padding: EdgeInsets.only(
+                                                          left: 20),
+                                                      child: Text(
+                                                        "Product",
+                                                      )),
+                                                  value: controller
+                                                      .selectedProduct,
+                                                  icon: Icon(Icons
+                                                      .keyboard_arrow_down),
+                                                  iconSize: 30,
+                                                  isExpanded: true,
+                                                  onChanged: (Product value) {
+                                                    controller
+                                                        .onChangeProductDropdown(
+                                                            value);
+                                                  },
+                                                  items: controller.productList
+                                                      .map((Product product) {
+                                                    return DropdownMenuItem<
+                                                        Product>(
+                                                      value: product,
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(left: 10),
+                                                        child: Text(
+                                                          product.name,
+                                                          style: TextStyle(),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }).toList()),
                                             ),
                                           ),
                                         ),
